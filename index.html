@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>MotorCycle</title>
+ </head>
+ <body>
+  
+  <button id="start-button">Start</button>
+  <button id="speed-button">Go Faster!</button>
+  <button id="stop-button">Stop</button>
+  <div id="info"></div>
+  
+  <img style="position:absolute; left: 0px; top: 80px;" src="motorCycle.gif">
+
+
+  <script>
+
+
+	var movePixels = 10;
+	var delayMs = 50;
+	var catTimer = null;
+	
+	//this function makes the motorcycle animated
+	
+	function motorCycleRunning() {
+		var img = document.getElementsByTagName('img')[0];
+		var currentLeft = parseInt(img.style.left);
+		img.style.left = (currentLeft + movePixels) + 'px';
+		if (currentLeft > (window.innerWidth-img.width)) {
+			img.style.left = '0px';
+		}
+	}
+	
+	//this function starts the animation on click
+	function startRunning() {
+		document.getElementById("start-button").disabled = true;
+		document.getElementById("stop-button").disabled = false;
+
+		catTimer = window.setInterval(motorCycleRunning, delayMs);
+	}
+
+	//this function makes the animation stop moving on click
+
+	function stopRunning(){
+		document.getElementById("start-button").disabled = false;
+		document.getElementById("stop-button").disabled = true;
+
+
+		catTimer = window.clearInterval(catTimer);
+	}
+	
+	//this function makes the animation move faster on each click
+	function moveFaster(){
+		
+		movePixels = movePixels + 10
+
+	
+	}
+
+
+//these functions allow for the buttons to work. creating the button
+var startButton = document.getElementById('start-button');
+startButton.addEventListener('click', startRunning);
+
+var stopButton = document.getElementById('stop-button');
+stopButton.addEventListener('click', stopRunning);
+
+var speedButton = document.getElementById('speed-button');
+speedButton.addEventListener('click', moveFaster);
+
+  </script>
+  
+ </body>
+</html>
